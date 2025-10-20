@@ -3,30 +3,47 @@
     <table class="min-w-full border border-gray-300">
       <thead class="bg-gray-200">
         <tr>
-          <th class="px-4 py-2 border">Top</th>
-          <th class="px-4 py-2 border">Avatar</th>
-          <th class="px-4 py-2 border">Description</th>
-          <th class="px-4 py-2 border">Jogo</th>
+          <th class="px-4 py-2 border"></th>
+          <th class="px-4 py-2 border"></th>
+          <th class="px-4 py-2 border"></th>
+          <th class="px-4 py-2 border"></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(game, index) in games" :key="index" class="hover:bg-gray-50">
-          <!-- Cột 1: hình top game -->
+          <!-- C1: hình top game -->
           <td class="px-4 py-2 border">
             <img :src="game.topImage" alt="Top" class="w-16 h-16 object-cover rounded" />
           </td>
 
-          <!-- Cột 2: avatar game -->
+          <!-- C2: avatar game -->
           <td class="px-4 py-2 border">
             <img :src="game.avatar" alt="Avatar" class="w-12 h-12 object-cover rounded-full" />
           </td>
 
-          <!-- Cột 3: GameItem -->
+          <!-- C3: GameItem -->
           <td class="px-4 py-2 border">
-            <GameItem :game="game" />
-          </td>
+      <div class="flex flex-col space-y-1">
+        <!-- H1: Tên game -->
+        <h3 class="font-semibold text-gray-800 text-sm">{{ game.name }}</h3>
 
-          <!-- Cột 4: Button -->
+        <!-- H2: Star -->
+        <div class="flex items-center">
+          <span
+            v-for="n in 5"
+            :key="n"
+            class="text-yellow-400 text-lg"
+          >
+            {{ n <= game.stars ? '★' : '☆' }}
+          </span>
+        </div>
+
+        <!-- H3: Ghi chú -->
+        <p class="text-xs text-gray-500">{{ game.note }}</p>
+      </div>
+    </td>
+
+          <!-- C4: Button -->
           <td class="px-4 py-2 border">
             <a :href="game.link" target="_blank" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-xs sm:text-sm">
               Jogo
@@ -39,13 +56,20 @@
 </template>
 
 <script>
-import GameItem from './GameItem.vue';
+// import GameItem from './GameItem.vue';
 
 export default {
   name: "GameList",
-  components: { GameItem },
+//   components: { GameItem },
   props: {
     games: { type: Array, required: true }
   }
 }
 </script>
+
+<style scoped>
+table {
+  margin: 0 auto; /* Căn giữa */
+  max-width: 900px;
+}
+</style>
